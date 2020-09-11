@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+
+button.icon-label i {
+    padding-right:10px;
+}

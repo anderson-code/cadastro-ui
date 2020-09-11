@@ -36,13 +36,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.submittingForm = true;
-    localStorage.setItem('isLoggedin', 'true');
-
-    this.router.navigate(['/dashboard']);
 
     this.auth.login(this.loginForm.value.email, this.loginForm.value.password)
     .then(() => {
-      this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']);
     })
     .catch(erro => {
      // this.errorHandler.handle(erro);

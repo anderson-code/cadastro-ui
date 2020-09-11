@@ -8,6 +8,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
+import { AuthGuard } from './guard/auth.guard';
+
+/*
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+*/
 
 @NgModule({
   declarations: [LoginComponent],
@@ -15,10 +22,18 @@ import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SecurityRoutingModule
-    
+    SecurityRoutingModule,
+  /*  JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: environment.tokenWhitelistedDomains,
+        blacklistedRoutes: environment.tokenBlacklistedRoutes
+      }
+    }),*/
+
   ],
   providers: [
+    AuthGuard,
     AuthService
   ]
 })

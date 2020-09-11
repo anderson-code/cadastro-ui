@@ -1,0 +1,198 @@
+<section class="content-header">
+    <h1>
+        Cadastro de clientes
+        <small>Preview</small>
+    </h1>
+    </section>
+
+    <section class="content">
+        <form role="form" autocomplete="off">
+            <div class="box box-primary card">
+                <div class="box-header with-border">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Salvar</button>
+                    <div class="divider"></div>
+                    <button type="button" label="Submit" class="btn btn-success" ><i class="fa fa-refresh"></i> Limpar</button>
+                    <div class="divider"></div>
+                    <button type="button" [routerLink]="['/clients']" class="btn btn-default"><i class="fa fa-reply"></i> Voltar</button>
+                </div>
+
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab_1" data-toggle="tab">Cliente</a></li>
+                                    <li><a href="#tab_2" data-toggle="tab">Endereço</a></li>
+                                    <li><a href="#tab_3" data-toggle="tab">Licença</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_1">
+                                        <div class="ui-g ui-fluid">
+                                            <div class="ui-g-12 ui-lg-6"> 
+                                                <div class="form-group">
+                                                    <label for="inptNomeFantasia">Nome Fantasia</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptNomeFantasia" placeholder="Nome Fantasia" autocomplete="name" required>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g-12 ui-lg-6"> 
+                                                <div class="form-group">
+                                                    <label for="inptRezaoSocial">Razão Social</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptRezaoSocial" placeholder="Razão Social" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="ui-g-12 ui-lg-4"> 
+                                                <div class="form-group">
+                                                    <label for="inptCnpj">CNPJ</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptCnpj" placeholder="CNPJ" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="ui-g-12 ui-lg-4"> 
+                                                <div class="form-group">
+                                                    <label for="inptInscEstadual">Inscrição Estadual</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptInscEstadual" placeholder="Inscrição Estadual" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="ui-g-12 ui-lg-4"> 
+                                                <div class="form-group">
+                                                    <label for="inptInscMunicipal">Inscição Municipal</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptInscMunicipal" placeholder="Inscição Municipal" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-lg-3"> 
+                                                <div class="form-group">
+                                                    <label for="inptTelefone">Telefone</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptTelefone" placeholder="Telefone" data-inputmask='"mask": "(99) 99999-9999"' data-mask autocomplete="tel">
+                                                </div>
+                                            </div>
+                                            <div class="ui-g-12 ui-lg-3"> 
+                                                <div class="form-group">
+                                                    <label for="inptCelular">Celular</label>
+                                                    <input type="text" class="form-control" id="inptCelular" placeholder="Celular" autocomplete="tel">
+                                                </div>
+                                            </div>
+                                            <div class="ui-g-12 ui-lg-6"> 
+                                                <div class="form-group">
+                                                    <label for="inptEmail">E-mail</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="email" class="form-control" id="inptEmail" placeholder="E-mail" autocomplete="email"> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                    <div class="tab-pane" id="tab_2">
+                                        <div class="ui-g ui-fluid">
+                                            <div class="ui-g-12 ui-lg-3"> 
+                                                <div class="form-group">
+                                                    <label for="inptCEP">CEP</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptCEP" placeholder="CEP" autocomplete="postal-code">
+                                                </div>
+                                            </div> 
+                                            <div class="ui-g-12 ui-lg-7"> 
+                                                <div class="form-group">
+                                                    <label for="inptLogradouro">Logradouro</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptLogradouro" placeholder="Logradouro" autocomplete="off">
+                                                </div>
+                                            </div> 
+                                            <div class="ui-g-12 ui-lg-2"> 
+                                                <div class="form-group">
+                                                    <label for="inptNumero">Número</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptNumero" placeholder="Número" autocomplete="family-name">
+                                                </div>
+                                            </div> 
+                                            
+                                            <div class="ui-g-12 ui-lg-3"> 
+                                                <div class="form-group">
+                                                    <label for="inptComplemento">Complemento</label>
+                                                    <input type="text" class="form-control" id="inptComplemento" placeholder="Complemento" autocomplete="off">
+                                                </div>
+                                            </div> 
+                                            <div class="ui-g-12 ui-lg-9"> 
+                                                <div class="form-group">
+                                                    <label for="inptBairro">Bairro</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptBairro" placeholder="Bairro" autocomplete="off">
+                                                </div>
+                                            </div> 
+                                            <div class="ui-g-12 ui-lg-6"> 
+                                                <div class="form-group">
+                                                    <label for="inptCidade">Cidade</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptCidade" placeholder="Cidade" autocomplete="address-level2">
+                                                </div>
+                                            </div> 
+                                            
+                                            <div class="ui-g-12 ui-lg-6"> 
+                                                <div class="form-group">
+                                                    <label for="inptEstado">Estado</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptEstado" placeholder="Estado" autocomplete="address-level1">
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                    <div class="tab-pane" id="tab_3">
+                                        <div class="ui-g ui-fluid">
+                                            <div class="ui-g-12 ui-lg-2"> 
+                                                <div class="form-group">
+                                                    <label for="inptQuantidadePDV">Quant. PDVs</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptQuantidadePDV" placeholder="Quant. PDVs" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-lg-2"> 
+                                                <div class="form-group">
+                                                    <label for="inptValorPorPDV">Valor por PDV</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptValorPorPDV" placeholder="Valor por PDV" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-lg-2"> 
+                                                <div class="form-group">
+                                                    <label for="inptInicioVigencia">Início Vigência</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                   
+                                                    <input type="text" class="form-control pull-right datepicker" id="inptInicioVigencia" placeholder="Início Vigência" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-lg-2"> 
+                                                <div class="form-group">
+                                                    <label for="inptPeriodoDeRenovacao">Período de renovação</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control" id="inptPeriodoDeRenovacao" placeholder="Período de renovação" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-lg-2"> 
+                                                <div class="form-group date">
+                                                    <label for="inptVencimentoLicenca">Vencimento Licença</label>
+                                                    <span style="font-size: large; color: red">*</span>
+                                                    <input type="text" class="form-control pull-right datepicker" id="inptVencimentoLicenca" placeholder="Vencimento Licença" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                </div>
+                                <!-- /.tab-content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </form>
+</section>

@@ -7,8 +7,7 @@ export const environment = {
   API_URL: 'http://localhost:4000',
   tokenWhitelistedDomains: [ new RegExp('localhost:4000') ],
   tokenBlacklistedRoutes: [ 
-    new RegExp('\/oauth\/token'),
-   'http://localhost:4000/oauth/token'
+    new RegExp('\/oauth\/token')
   ]
 };
 

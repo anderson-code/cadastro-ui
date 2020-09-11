@@ -1,0 +1,74 @@
+<section class="content-header">
+    <h1>
+        Clientes
+        <small>Preview</small>
+    </h1>
+</section>
+
+<section class="content">
+    <form role="form">
+        <div class="box box-primary card">
+            <div class="box-header with-border">
+                <button type="button" [routerLink]="['/clients/form']" class="btn btn-primary icon-label"><i class="fa fa-plus"></i> Novo</button>
+                <div class="divider"></div>
+                <button type="button" label="Submit" class="btn btn-danger icon-label"><i class="fa fa-trash"></i> Excluir Selecionados</button>
+            </div>
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="inptRazaoSocial">Razão Social</label>
+                            <input type="text" class="form-control" id="inptRazaoSocial" placeholder="Razão Social" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="inptCNPJ">CNPJ</label>
+                            <input type="text" mask="00.000.000/0000-00" class="form-control" id="inptCNPJ" placeholder="CNPJ" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12"></div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary icon-label"><i class="fa fa-filter"></i> Filtrar</button>
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #c8c8c8; border-radius: 3px; box-sizing: border-box; display: block;
+                unicode-bidi: isolate;
+                margin-block-start: 1.2em;
+                margin-block-end: 1.2em;
+                margin-inline-start: auto;
+                margin-inline-end: auto;
+                overflow: hidden;"/>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p-table [value]="clientes" [paginator]="true" [rows]="5" [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Nome Fantasia</th>
+                                    <th>Razão Social</th>
+                                    <th>CNPJ</th>
+                                    <th>Telefone</th>
+                                    <th></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-cliente>
+                                <tr>
+                                    <td>{{cliente.nomeFantasia}}</td>
+                                    <td>{{cliente.razaoSocial}}</td>
+                                    <td>{{cliente.cnpj | mask: '00.000.000/0000-00'}}</td>
+                                    <td>{{cliente.telefone | mask: '(00) 00009-0000'}}</td>
+                                    <td><a href="#"><i class="fa fa-pencil-square-o"></i></a></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </form>
+</section>

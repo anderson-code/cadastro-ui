@@ -16,6 +16,12 @@ import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './security/auth-interceptor';
+import { NgProgressModule } from 'ngx-progressbar';
+import { NgProgressHttpModule } from "ngx-progressbar/http";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ClientsModule } from './pages/clients/clients.module';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -29,10 +35,12 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
     SecurityModule,
     DashboardModule,
+    ClientsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -40,8 +48,22 @@ export function tokenGetter() {
         blacklistedRoutes: environment.tokenBlacklistedRoutes
       }
     }),
+    NgProgressModule.withConfig({
+      spinnerPosition: "left",
+      color: "#FFC107",
+      thick: true
+    }),
+    NgProgressHttpModule
   ],
-  providers: [],
+  providers: [
+   /*{
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+     },*/
+
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

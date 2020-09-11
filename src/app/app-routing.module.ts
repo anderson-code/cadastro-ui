@@ -8,16 +8,16 @@ import { AuthGuard } from './security/guard/auth.guard';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
     component: BlankComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full'
-      },
-      {
         path: 'login',
-        loadChildren: './security/security.module#SecurityModule'
+        loadChildren: () => import('./security/security.module').then(m => m.SecurityModule)
       }
     ]
   },
@@ -27,13 +27,10 @@ const routes: Routes = [
     canActivate: [AuthGuard], 
     children: [
         {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-        {path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule' },
+        {path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)},
+        {path: 'clients', loadChildren: () => import('./pages/clients/clients.module').then(m => m.ClientsModule)},
         {path: '**', redirectTo: 'pagina-nao-encontrada' }
     ]
-  }, 
-  {
-    path: '**',
-    redirectTo: ''
   }
 ];
 
