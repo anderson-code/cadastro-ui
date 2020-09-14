@@ -9,3 +9,8 @@
 button.icon-label i {
     padding-right:10px;
 }
+
+label.required:after {
+    color: red;
+    content: " *";
+}
