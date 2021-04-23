@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Endereco } from '../model';
 
 declare var $: any;
 
@@ -8,6 +9,8 @@ declare var $: any;
   styleUrls: ['./clients-form.component.scss']
 })
 export class ClientsFormComponent implements OnInit {
+
+  endereco: Endereco = new Endereco();
 
   constructor() { }
 
@@ -33,6 +36,15 @@ export class ClientsFormComponent implements OnInit {
       zIndexOffset: 1000000
     });
   }
+
+  consultarCep(CEP) {
+    let cepSemMascara = removeMascara(CEP);
+    if (cepSemMascara != null && cepSemMascara.length >= 8) {
+        this.enderecoService.consultarEnderecoPorCep(cepSemMascara).subscribe((res) => {
+            this.preencherDadosEndereco(res);
+        });
+    }
+}
 
 
 }
