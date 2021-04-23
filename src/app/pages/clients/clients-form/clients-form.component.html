@@ -6,7 +6,7 @@
     </section>
 
     <section class="content">
-        <form role="form" autocomplete="off">
+        <form role="form" autocomplete="off" #frmCliente="ngForm" role="form" (ngSubmit)="salvar(frmCliente.value)">
             <div class="box box-primary card">
                 <div class="box-header with-border">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Salvar</button>
@@ -31,50 +31,58 @@
                                             <div class="ui-g-12 ui-lg-6"> 
                                                 <div class="form-group">
                                                     <label for="inptNomeFantasia" class="required">Nome Fantasia</label>
-                                                    <input type="text" class="form-control" id="inptNomeFantasia" placeholder="Nome Fantasia" autocomplete="name" required>
+                                                    <input type="text" class="form-control" id="inptNomeFantasia" #inptNomeFantasia="ngModel" name="inptNomeFantasia" [(ngModel)]="cliente.nomeFantasia" placeholder="Nome Fantasia" autocomplete="name" required>
+                                                    <app-message [control]="inptNomeFantasia" [submit]="frmCliente.submitted" error="required" text="Informe o Nome Fantasia"></app-message>
                                                 </div>
                                             </div>
                                             <div class="ui-g-12 ui-lg-6"> 
                                                 <div class="form-group">
                                                     <label for="inptRezaoSocial" class="required">Razão Social</label>
-                                                    <input type="text" class="form-control" id="inptRezaoSocial" placeholder="Razão Social" autocomplete="off">
+                                                    <input type="text" class="form-control" id="inptRezaoSocial" #inptRazaoSocial="ngModel" name="inptRazaoSocial" [(ngModel)]="cliente.razaoSocial" placeholder="Razão Social" autocomplete="off" required>
+                                                    <app-message [control]="inptRazaoSocial" [submit]="frmCliente.submitted" error="required" text="Informe a Razão Social"></app-message>
                                                 </div>
                                             </div>
                                             <div class="ui-g-12 ui-lg-4"> 
                                                 <div class="form-group">
                                                     <label for="inptCnpj" class="required">CNPJ</label>
-                                                    <input type="text" class="form-control" id="inptCnpj" placeholder="CNPJ" autocomplete="off">
+                                                    <input type="text" class="form-control" id="inptCnpj" #inptCnpj="ngModel" name="inptCnpj" [(ngModel)]="cliente.cnpj" placeholder="CNPJ" autocomplete="off" required>
+                                                    <app-message [control]="inptCnpj" [submit]="frmCliente.submitted" error="required" text="Informe o CNPJ"></app-message>
                                                 </div>
                                             </div>
                                             <div class="ui-g-12 ui-lg-4"> 
                                                 <div class="form-group">
                                                     <label for="inptInscEstadual" class="required">Inscrição Estadual</label>
-                                                    <input type="text" class="form-control" id="inptInscEstadual" placeholder="Inscrição Estadual" autocomplete="off">
+                                                    <input type="text" class="form-control" id="inptInscEstadual" #inptInscEstadual="ngModel" name="inptInscEstadual" [(ngModel)]="cliente.inscricaoEstadual" placeholder="Inscrição Estadual" autocomplete="off" required>
+                                                    <app-message [control]="inptInscEstadual" [submit]="frmCliente.submitted" error="required" text="Informe a Inscrição Estadual"></app-message>
                                                 </div>
                                             </div>
                                             <div class="ui-g-12 ui-lg-4"> 
                                                 <div class="form-group">
                                                     <label for="inptInscMunicipal" class="required">Inscição Municipal</label>
-                                                    <input type="text" class="form-control" id="inptInscMunicipal" placeholder="Inscição Municipal" autocomplete="off">
+                                                    <input type="text" class="form-control" id="inptInscMunicipal" #inptInscMunicipal="ngModel" name="inptInscMunicipal" [(ngModel)]="cliente.inscricaoMunicipal" placeholder="Inscição Municipal" autocomplete="off" required/>
+                                                    <app-message [control]="inptInscMunicipal" [submit]="frmCliente.submitted" error="required" text="Informe a Inscrição Municipal"></app-message>
                                                 </div>
                                             </div>
 
                                             <div class="ui-g-12 ui-lg-3"> 
                                                 <div class="form-group">
                                                     <label for="inptTelefone" class="required">Telefone</label>
-                                                    <input type="text" class="form-control" id="inptTelefone" placeholder="Telefone" data-inputmask='"mask": "(99) 99999-9999"' data-mask autocomplete="tel">
+                                                    <input type="text" class="form-control" id="inptTelefone" #inptTelefone="ngModel" name="inptTelefone" [(ngModel)]="cliente.telefone" placeholder="Telefone" data-inputmask='"mask": "(99) 99999-9999"' data-mask autocomplete="tel" required>
+                                                    <app-message [control]="inptTelefone" [submit]="frmCliente.submitted" error="required" text="Informe o Telefone"></app-message>
                                                 </div>
                                             </div>
                                             <div class="ui-g-12 ui-lg-3"> 
                                                 <div class="form-group">
                                                     <label for="inptCelular">Celular</label>
-                                                    <input type="text" class="form-control" id="inptCelular" placeholder="Celular" autocomplete="tel">
+                                                    <input type="text" class="form-control" id="inptCelular" #inptCelular="ngModel" name="inptCelular" [(ngModel)]="cliente.celular" placeholder="Celular" autocomplete="tel">
+                                                    <app-message [control]="inptCelular" [submit]="frmCliente.submitted" error="required" text="Informe o Celular"></app-message>
                                                 </div>
                                             </div>
                                             <div class="ui-g-12 ui-lg-6"> 
                                                 <div class="form-group">
                                                     <label for="inptEmail" class="required">E-mail</label>
-                                                    <input type="email" class="form-control" id="inptEmail" placeholder="E-mail" autocomplete="email"> 
+                                                    <input type="email" class="form-control" id="inptEmail" #inptEmail="ngModel" name="inptEmail" [(ngModel)]="cliente.email" placeholder="E-mail" autocomplete="email" required>
+                                                    <app-message [control]="inptEmail" [submit]="frmCliente.submitted" error="required" text="Informe o E-mail"></app-message> 
                                                 </div>
                                             </div>
                                         </div>
@@ -85,45 +93,51 @@
                                             <div class="ui-g-12 ui-lg-3"> 
                                                 <div class="form-group">
                                                     <label for="inptCEP" class="required">CEP</label>
-                                                    <input type="text" class="form-control" id="inptCEP" placeholder="CEP" autocomplete="postal-code">
+                                                    <input type="text" class="form-control" id="inptCEP" #inptCEP="ngModel" name="inptCEP" [(ngModel)]="endereco.cep" (keyup)="consultarCep(inptCEP.value)" placeholder="CEP" autocomplete="postal-code" mask="00000-000" required>
+                                                    <app-message [control]="inptCEP" [submit]="frmCliente.submitted" error="required" text="Informe o CEP"></app-message>
                                                 </div>
                                             </div> 
                                             <div class="ui-g-12 ui-lg-7"> 
                                                 <div class="form-group">
                                                     <label for="inptLogradouro" class="required">Logradouro</label>
-                                                    <input type="text" class="form-control" id="inptLogradouro" placeholder="Logradouro" autocomplete="off">
+                                                    <input type="text" class="form-control" id="inptLogradouro" #inptLogradouro="ngModel" name="inptLogradouro" [(ngModel)]="endereco.logradouro" placeholder="Logradouro" autocomplete="off" readonly required>
+                                                    <app-message [control]="inptLogradouro" [submit]="frmCliente.submitted" error="required" text="Informe o Logradouro"></app-message>
                                                 </div>
                                             </div> 
                                             <div class="ui-g-12 ui-lg-2"> 
                                                 <div class="form-group">
                                                     <label for="inptNumero" class="required">Número</label>
-                                                    <input type="text" class="form-control" id="inptNumero" placeholder="Número" autocomplete="family-name">
+                                                    <input type="text" class="form-control" id="inptNumero" #inptNumero="ngModel" name="inptNumero" [(ngModel)]="endereco.numero" placeholder="Número" autocomplete="family-name">
+                                                    <app-message [control]="inptNumero" [submit]="frmCliente.submitted" error="required" text="Informe o Número"></app-message>
                                                 </div>
                                             </div> 
                                             
                                             <div class="ui-g-12 ui-lg-4"> 
                                                 <div class="form-group">
                                                     <label for="inptComplemento">Complemento</label>
-                                                    <input type="text" class="form-control" id="inptComplemento" placeholder="Complemento" autocomplete="off">
+                                                    <input type="text" class="form-control" id="inptComplemento" #inptComplemento="ngModel" name="inptComplemento" [(ngModel)]="endereco.complemento" placeholder="Complemento" autocomplete="off">
                                                 </div>
                                             </div> 
                                             <div class="ui-g-12 ui-lg-8"> 
                                                 <div class="form-group">
                                                     <label for="inptBairro" class="required">Bairro</label>
-                                                    <input type="text" class="form-control" id="inptBairro" placeholder="Bairro" autocomplete="off">
+                                                    <input type="text" class="form-control" id="inptBairro" id="inptBairro" #inptBairro="ngModel" name="inptBairro" [(ngModel)]="endereco.bairro" placeholder="Bairro" autocomplete="off">
+                                                    <app-message [control]="inptBairro" error="required" text="Informe o Bairro"></app-message>
                                                 </div>
                                             </div> 
                                             <div class="ui-g-12 ui-lg-6"> 
                                                 <div class="form-group">
-                                                    <label for="inptCidade" class="required">Cidade</label>
-                                                    <input type="text" class="form-control" id="inptCidade" placeholder="Cidade" autocomplete="address-level2">
+                                                    <label for="inptMunicipio" class="required">Cidade</label>
+                                                    <input type="text" class="form-control" id="inptMunicipio" #inptMunicipio="ngModel" name="inptMunicipio" [(ngModel)]="endereco.municipio" placeholder="Município" autocomplete="address-level2">
+                                                    <app-message [control]="inptMunicipio" error="required" text="Informe o Município"></app-message>
                                                 </div>
                                             </div> 
                                             
                                             <div class="ui-g-12 ui-lg-6"> 
                                                 <div class="form-group">
-                                                    <label for="inptEstado" class="required">Estado</label>
-                                                    <input type="text" class="form-control" id="inptEstado" placeholder="Estado" autocomplete="address-level1">
+                                                    <label for="inptEstado" class="required">UF</label>
+                                                    <input type="text" class="form-control" id="inptEstado" #inptEstado="ngModel" name="inptEstado" [(ngModel)]="endereco.estado" placeholder="Estado" autocomplete="address-level1">
+                                                    <app-message [control]="inptEstado" error="required" text="Informe o Estado"></app-message>
                                                 </div>
                                             </div> 
                                         </div>

@@ -4,11 +4,16 @@ import { CommonModule } from '@angular/common';
 import { SecurityRoutingModule } from './security-routing.module';
 import { LoginComponent } from '../pages/login/login.component';
 import { AuthService } from './guard/auth.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { AuthGuard } from './guard/auth.guard';
+import { ErrorHandlerService } from '../shared/erro/error-handler.service';
+import { ControlHttp } from './control-http';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { RouterModule } from '@angular/router';
+
 
 /*
 export function tokenGetter() {
@@ -21,7 +26,9 @@ export function tokenGetter() {
   imports: [
     CommonModule,
     HttpClientModule,
+    RouterModule,
     ReactiveFormsModule,
+    FormsModule,
     SecurityRoutingModule,
   /*  JwtModule.forRoot({
       config: {
@@ -34,7 +41,11 @@ export function tokenGetter() {
   ],
   providers: [
     AuthGuard,
-    AuthService
+    AuthService,
+    ControlHttp,
+    ErrorHandlerService,
+    ConfirmationService,
+    MessageService,
   ]
 })
 export class SecurityModule { }

@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Endereco } from '../model';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AlertaService } from 'src/app/shared/alerta/alerta.service';
+import { EnderecoService } from 'src/app/shared/endereco/endereco.service';
+import { ErrorHandlerService } from 'src/app/shared/erro/error-handler.service';
+import { removeMascara } from 'src/app/shared/util';
+import { ClientsService } from '../clients.service';
+import { Cliente, Endereco } from '../model';
 
 declare var $: any;
 
@@ -10,9 +15,13 @@ declare var $: any;
 })
 export class ClientsFormComponent implements OnInit {
 
+  cliente: Cliente = new Cliente();
   endereco: Endereco = new Endereco();
-
-  constructor() { }
+  
+  constructor(private clientsService: ClientsService ,
+    private enderecoService: EnderecoService,     
+    private errorHandler: ErrorHandlerService,
+    private alertService: AlertaService) { }
 
   ngOnInit(): void {
     $.fn.datepicker.dates['pt-BR'] = {
@@ -37,14 +46,58 @@ export class ClientsFormComponent implements OnInit {
     });
   }
 
-  consultarCep(CEP) {
-    let cepSemMascara = removeMascara(CEP);
+  consultarCep(cep) {
+    let cepSemMascara = removeMascara(cep);
     if (cepSemMascara != null && cepSemMascara.length >= 8) {
         this.enderecoService.consultarEnderecoPorCep(cepSemMascara).subscribe((res) => {
             this.preencherDadosEndereco(res);
+        },
+        erro => {
+          if(erro.status == '404') {
+            this.endereco = new Endereco();
+            this.endereco.cep = cep;
+          }
         });
     }
-}
+  }
+
+  preencherDadosEndereco(endereco: any) {
+    this.endereco.logradouro = endereco.logradouro;
+    this.endereco.bairro = endereco.bairro;
+    this.endereco.municipio = endereco.municipio;
+    this.endereco.uf = endereco.uf;
+    this.endereco.estado = endereco.estado;
+  }
+
+  salvar(value: any) {
+    this.setarCliente(value);
+    this.clientsService.cadastrar(this.cliente).subscribe(res => {
+        this.alertService.exibirSucesso('Dados gravados com sucesso!');
+      },
+      erro => this.errorHandler.handle(erro)
+    );
+
+
+   /* this.alunoEgressoService.alterar(this.entidade).subscribe(res => {
+            this.alunoEgressoChange.emit(res);
+            this.alertService.exibirSucesso('Dados gravados com sucesso!');
+            this.exibirFormularioDadosGerais = false;
+        },
+        erro => this.errorHandler.handle(erro)
+    );
+    */
+  }
+
+  private setarCliente(value: any) {
+    this.cliente.nomeFantasia=value.nomeFantasia;
+    this.endereco.cep = value.inptCEP;
+    this.endereco.logradouro = value.inptLogradouro;
+    this.endereco.numero = value.inptNumero;
+    this.endereco.complemento = value.inptComplemento;
+    this.endereco.municipio = value.inptMunicipio;
+    this.endereco.uf = value.inptUf;
+
+  }
 
 
 }

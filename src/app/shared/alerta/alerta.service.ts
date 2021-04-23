@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import Swal from "sweetalert2";
-import {LogoutService} from '../../seguranca/logout.service';
+import {LogoutService} from '../../security/logout.service';
 
 const TITULO_ACESSO = "ACESSO";
 const TITULO_ERRO = "ERRO";
@@ -21,39 +21,35 @@ export class AlertaService {
     }
 
     exibirInformacao(mensagem) {
-        Swal.fire({
-            type: "info",
-            title: TITULO_AVISO,
-            text: mensagem
-        });
+        Swal.fire(TITULO_AVISO, mensagem, "info");
     }
 
     exibirSucesso(mensagem) {
-        Swal.fire({
-            type: "success",
-            title: TITULO_SUCESSO,
-            text: mensagem
-        });
+        Swal.fire(TITULO_SUCESSO, mensagem, "success");
     }
 
     exibirErro(mensagem) {
-        Swal.fire({
-            type: "error",
-            title: TITULO_ERRO,
-            text: mensagem
-        });
+        Swal.fire(TITULO_ERRO, mensagem, "error");
     }
 
     exibirConfirmacao(titulo, mensagem, tipo) {
         return Swal.fire({
             title: titulo,
             text: mensagem,
-            type: tipo,
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             cancelButtonText: "NÃO",
             confirmButtonText: "SIM"
+        }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deletado!',
+                'Operação realizada com sucesso.',
+                'success'
+              )
+            }
         });
     }
 
@@ -68,7 +64,7 @@ export class AlertaService {
                 Swal.fire({
                     title: TITULO_ACESSO,
                     text: MENSAGEM_TOKEN_TIMEOUT,
-                    type: "info",
+                    icon: 'warning',
                     confirmButtonColor: "#3085d6",
                     confirmButtonText: "Ok"
                 }).then((result) => {

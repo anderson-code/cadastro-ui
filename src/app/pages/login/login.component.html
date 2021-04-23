@@ -25,14 +25,7 @@
           <!-- /.col -->
         </div>
       </form>
-      <a [routerLink]="['/site']" class="text-center">Home Page</a>
       <br>
-      <div *ngIf="f.email.errors || f.password.errors" class="text-danger mt-5">
-          <div *ngIf="submittingForm && f.email.errors.required">E-mail is required</div>
-          <div *ngIf="submittingForm !== null && f.email.errors?.email">E-mail is invalid</div>
-          <div *ngIf="submittingForm !== null && f.email.errors?.equal">E-mail must be equal to: {{emailTesting}}</div>
-          <div *ngIf="submittingForm !== null && f.password.errors?.equal">Password must be equal to: {{passwordTestig}}</div>
-      </div>
     </div>
     <!-- /.login-box-body -->
   </div>

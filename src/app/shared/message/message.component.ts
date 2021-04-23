@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
+import { EnderecoService } from '../endereco/endereco.service';
 
 @Component({
   selector: 'app-message',
   template: `
-  <div *ngIf="temErro()" class="ui-message ui-message-error ui-messages-error ui-widget ui-corner-all ng-star-inserted">
+  <div *ngIf="temErro()" class="ui-messages-error">
     {{ text }}
   </div>
 `,
@@ -12,6 +13,7 @@ import { FormControl } from '@angular/forms';
   .ui-messages-error {
     margin: 0;
     margin-top: 4px;
+    color: #dd4b39;
   }
 `]
 })
@@ -20,9 +22,12 @@ export class MessageComponent {
   @Input() error: string;
   @Input() control: FormControl;
   @Input() text: string;
+  @Input() submit: boolean;
 
   temErro(): boolean {
-    return this.control.hasError(this.error) && this.control.dirty;
+    
+    return this.control.hasError(this.error) && (this.control.dirty || this.submit);
+    //return this.control.hasError(this.error) && this.control.dirty  && (this.control.touched || this.form.submitted);
   }
 
 

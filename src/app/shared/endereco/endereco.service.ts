@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {of} from 'rxjs/internal/observable/of';
 import {catchError, map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import { PegHttp } from '../../seguranca/peg-http';
+import { ControlHttp } from '../../security/control-http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnderecoService {
 
-  private resourceUrl = environment.API_URL + '/api/pessoa/endereco';
+  private resourceUrl = environment.API_URL + '/api/endereco';
 
-  constructor(private http: PegHttp) {
-  }
-
-  listarUfs(): Observable<any> {
-    return this.http.get(`${this.resourceUrl}/listarUnidadesFederativas`);
+  constructor(private http: ControlHttp) {
   }
 
   consultarEnderecoPorCep(cep: string): Observable<any> {
@@ -27,6 +22,7 @@ export class EnderecoService {
     return this.http.get(`${this.resourceUrl}/${cep}`).pipe(
         catchError(err => {
           return throwError(err);
-        }));
-  }
+        })
+    );
+  } 
 }

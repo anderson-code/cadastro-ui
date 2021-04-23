@@ -22,6 +22,7 @@ import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from "ngx-progressbar/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ClientsModule } from './pages/clients/clients.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -36,7 +37,7 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    AppRoutingModule,  
     CoreModule,
     SecurityModule,
     DashboardModule,
