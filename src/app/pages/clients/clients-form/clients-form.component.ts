@@ -4,7 +4,10 @@ import { EnderecoService } from 'src/app/shared/endereco/endereco.service';
 import { ErrorHandlerService } from 'src/app/shared/erro/error-handler.service';
 import { removeMascara } from 'src/app/shared/util';
 import { ClientsService } from '../clients.service';
-import { Cliente, Endereco } from '../model';
+import { Cliente, Endereco, Uf, Licenca } from '../model';
+import * as moment from 'moment';
+import { Router } from '@angular/router';
+
 
 declare var $: any;
 
@@ -16,10 +19,12 @@ declare var $: any;
 export class ClientsFormComponent implements OnInit {
 
   cliente: Cliente = new Cliente();
-  endereco: Endereco = new Endereco();
-  
+  vencimentoLicenca: string;
+  ufs: Array<Uf> = new Array<Uf>();
+
   constructor(private clientsService: ClientsService ,
-    private enderecoService: EnderecoService,     
+    private enderecoService: EnderecoService,
+    private router: Router,     
     private errorHandler: ErrorHandlerService,
     private alertService: AlertaService) { }
 
@@ -43,7 +48,27 @@ export class ClientsFormComponent implements OnInit {
       todayHighlight: true,
       clearBtn: true,
       zIndexOffset: 1000000
+//    }).on('input change', e => $("input[name='inptVencimentoLicenca']").val(e.target.value));
+    }).on('input change', e => {
+      this.vencimentoLicenca = e.target.value;
+      let data = moment(e.target.value, 'DD/MM/YYYY', true);
+      if(data.isValid()) {
+        this.cliente.licenca.vencimentoLicenca = data.toDate(); 
+      } else {
+        this.cliente.licenca.vencimentoLicenca = undefined;
+      }
     });
+
+    this.enderecoService.listarUfs().subscribe(
+       (res:any) => {
+         console.log(res);
+         res.forEach(uf => {
+           this.ufs.push(uf);
+         });
+       } 
+    );
+
+    this.limparEntidades();
   }
 
   consultarCep(cep) {
@@ -54,50 +79,35 @@ export class ClientsFormComponent implements OnInit {
         },
         erro => {
           if(erro.status == '404') {
-            this.endereco = new Endereco();
-            this.endereco.cep = cep;
+            this.cliente.endereco = new Endereco();
+            this.cliente.endereco.cep = cep;
           }
         });
     }
   }
 
   preencherDadosEndereco(endereco: any) {
-    this.endereco.logradouro = endereco.logradouro;
-    this.endereco.bairro = endereco.bairro;
-    this.endereco.municipio = endereco.municipio;
-    this.endereco.uf = endereco.uf;
-    this.endereco.estado = endereco.estado;
+    this.cliente.endereco.logradouro = endereco.logradouro;
+    this.cliente.endereco.bairro = endereco.bairro;
+    this.cliente.endereco.municipio = endereco.municipio;
+    this.cliente.endereco.uf = this.ufs.filter((uf:Uf) => uf.codigo == endereco.uf)[0];
   }
 
   salvar(value: any) {
-    this.setarCliente(value);
+    console.log(this.cliente);
     this.clientsService.cadastrar(this.cliente).subscribe(res => {
-        this.alertService.exibirSucesso('Dados gravados com sucesso!');
+        this.alertService.exibirSucesso('Cliente cadastrado com sucesso!');
+        this.limparEntidades();
+        this.router.navigate(['/clients']);              
       },
       erro => this.errorHandler.handle(erro)
     );
-
-
-   /* this.alunoEgressoService.alterar(this.entidade).subscribe(res => {
-            this.alunoEgressoChange.emit(res);
-            this.alertService.exibirSucesso('Dados gravados com sucesso!');
-            this.exibirFormularioDadosGerais = false;
-        },
-        erro => this.errorHandler.handle(erro)
-    );
-    */
   }
 
-  private setarCliente(value: any) {
-    this.cliente.nomeFantasia=value.nomeFantasia;
-    this.endereco.cep = value.inptCEP;
-    this.endereco.logradouro = value.inptLogradouro;
-    this.endereco.numero = value.inptNumero;
-    this.endereco.complemento = value.inptComplemento;
-    this.endereco.municipio = value.inptMunicipio;
-    this.endereco.uf = value.inptUf;
-
+  private limparEntidades() {
+    this.cliente = new Cliente();
+    this.cliente.licenca = new Licenca();
+    this.cliente.endereco = new Endereco();
   }
-
 
 }

@@ -8,6 +8,8 @@ export class Cliente {
     telefone: string;
     celular: string;
     email: string;
+    endereco: Endereco;
+    licenca: Licenca;
 }
 
 export class Endereco {
@@ -17,8 +19,20 @@ export class Endereco {
     bairro: string;
     cep: string;
     municipio: string;
-    uf: string;
+    uf: Uf;
+}
+
+export class Uf {
+    codigo: string;
     estado: string;
+}
+
+export class Licenca {
+    id: number;
+    quantidadePdvs: number;
+    valorPorPdv: number;
+    periodoRenovacao: string;
+    vencimentoLicenca: Date;
 }
   
   

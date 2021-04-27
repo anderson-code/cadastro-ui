@@ -25,4 +25,8 @@ export class EnderecoService {
         })
     );
   } 
+
+  listarUfs() {
+    return this.http.get(`${this.resourceUrl}/uf/listar`);
+  }
 }
